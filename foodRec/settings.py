@@ -99,6 +99,7 @@ STATICFILES_FINDERS = (
 LOGIN_URL = '/login/'
 
 URL_ROOT = '/'
+PHOTO_UPLOAD_PATH=BASE_DIR+'../AppServer/static/assets/img'
 #PHOTO_UPLOAD_PATH = "/opt/GlucoGuide/user_photo"
 # PHOTO_UPLOAD_PATH = os.path.join(BASE_DIR, os.path.join('AppServer', os.path.join('static', 'user_photo')))
 # PHOTO_UPLOAD_PATH = BASE_DIR + "/AppServer" + STATIC_URL + 'user_photo'

@@ -25,17 +25,22 @@ def BinaryProbToNPY(path, W, H, C):
 def load_model():
     global caffe_root
 
-    caffe.set_phase_test()
+#    caffe.set_phase_test()
     caffe.set_mode_cpu()
 
     # Make sure that caffe is on the python path:
-    net = caffe.Classifier(caffe_root + 'models/food101/deploy.prototxt',
-                           caffe_root + 'models/food101/bvlc_googlenet_iter_560000.caffemodel')
-
     mean = BinaryProbToNPY(caffe_root + 'models/food101/food_mean.binaryproto', 256, 256, 3)
-    net.set_mean('data', mean)  # ImageNet mean
-    net.set_raw_scale('data', 255)  # the reference model operates on images in [0,255] range instead of [0,1]
-    net.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB
+    print mean.shape
+    net = caffe.Classifier(caffe_root + 'models/food101/deploy.prototxt',
+                           caffe_root + 'models/food101/bvlc_googlenet_iter_560000.caffemodel',
+			   channel_swap=(2,1,0),
+                           raw_scale=255,
+                           image_dims=(256, 256))
+
+   # mean = BinaryProbToNPY(caffe_root + 'models/food101/food_mean.binaryproto', 256, 256, 3)
+   # net.set_mean('data', mean)  # ImageNet mean
+   # net.set_raw_scale('data', 255)  # the reference model operates on images in [0,255] range instead of [0,1]
+   # net.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB
     # net.set_phase_test()
     # net.set_mode_cpu()
     # input preprocessing: 'data' is the name of the input blob == net.inputs[0]
@@ -58,7 +63,7 @@ def load_model():
 
 def get_labels():
     labels = []
-    f = open(caffe_root + 'models/labels.txt')
+    f = open(caffe_root + 'models/food101/labels.txt')
     i = 0
     for line in f:
         # print line
@@ -81,13 +86,13 @@ def get_predict_labels(img_url, classifier, labels_all):
         labels.append((labels_all[index][:-2], round(100*scores[index], 2)))
     return labels
 
-
-# if __name__=="__main__":
-# 	la = get_labels()
-# 	classifier = load_model()
-# 	l = get_predict_labels('/opt/GlucoGuide/user_photo/1/meal_20141126_042204.jpg', classifier, la)
-# 	print l
-# 	for k in l:
-# 		print k[0], k[1]
-# 	# get_labels()
-
+'''
+if __name__=="__main__":
+ 	la = get_labels()
+ 	classifier = load_model()
+ 	l = get_predict_labels('/home/robin/food101/images/apple_pie/825589.jpg', classifier, la)
+ 	print l
+ 	for k in l:
+ 		print k[0], k[1]
+ 	# get_labels()
+'''
