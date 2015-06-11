@@ -32,7 +32,8 @@ def load_model():
     mean = BinaryProbToNPY(caffe_root + 'models/food101/food_mean.binaryproto', 256, 256, 3)
     print mean.shape
     net = caffe.Classifier(caffe_root + 'models/food101/deploy.prototxt',
-                           caffe_root + 'models/food101/bvlc_googlenet_iter_560000.caffemodel',
+                           caffe_root + 'models/food101/bvlc_googlenet_iter_640000.caffemodel',
+			   mean=mean.mean(1).mean(1),
 			   channel_swap=(2,1,0),
                            raw_scale=255,
                            image_dims=(256, 256))
@@ -76,23 +77,23 @@ def get_labels():
 def get_predict_labels(img_url, classifier, labels_all):
     labels = []
     scores = classifier.predict([caffe.io.load_image(img_url)],oversample = False)
-    label_index = scores.argsort()[:,::-1][:,:5]
+    label_index = scores.argsort()[:,::-1][:,:10]
     # print label_index
     label_index = label_index.reshape(-1)
     # print scores.shape
     scores = scores.reshape(-1)
     for index in label_index:
         # print index, labels_all[index][:-2], scores[index]
-        labels.append((labels_all[index][:-2], round(100*scores[index], 2)))
+        labels.append((labels_all[index][:-1], round(100*scores[index], 2)))
     return labels
 
-'''
+
 if __name__=="__main__":
  	la = get_labels()
  	classifier = load_model()
- 	l = get_predict_labels('/home/robin/food101/images/apple_pie/825589.jpg', classifier, la)
- 	print l
+ 	#l = get_predict_labels('/home/robin/food101/images/apple_pie/825589.jpg', classifier, la)
+ 	l = get_predict_labels('../apple_pie.jpg', classifier, la)
+	print l
  	for k in l:
  		print k[0], k[1]
  	# get_labels()
-'''
