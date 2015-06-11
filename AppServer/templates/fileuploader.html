@@ -1,0 +1,76 @@
+{% load staticfiles %}
+{% include 'header.html' %}
+
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-sm-12 ">
+		  <h1 class="page-header text-center">Food Photo Upload</h1>
+		</div>
+		<div class="centered col-sm-12 ">
+		<form enctype="multipart/form-data" method="post" action="/fileupload/">
+			{% csrf_token %}
+            <div class="form-group">
+                <input id="meal_photo" type="file" name="meal_photo" class="file">
+            </div>
+		</form>
+		</div>
+	</div>
+
+{% if uploaded %}
+	<div class="row">
+		<div class="col-sm-6">
+			<img class="center-block " src="{% static ""%}{{photo.file_path}}"   width="300px" alt="" >
+		</div>
+		<div class="col-sm-6">
+				<!-- <div class="media-body"> -->
+				<ul class="list-group">
+				
+				<li class="list-group-item "> {{ photo.pred.tag1 }} {{ photo.pred.prob1 }}%
+					<!-- <span > -->
+					<div class="progress">
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ photo.pred.prob1 }}%;">
+						</div>
+					</div>
+					<!-- </span> -->
+				</li>	
+				<li class="list-group-item"> {{ photo.pred.tag2 }} : {{ photo.pred.prob2 }}% 
+					<span >
+					<div class="progress">
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ photo.pred.prob2 }}%;">
+						</div>
+					</div>
+					</span>
+				</li>
+				<li class="list-group-item"> {{ photo.pred.tag3 }} : {{ photo.pred.prob3 }}% 
+					<span >
+					<div class="progress">
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ photo.pred.prob3 }}%;">
+						</div>
+					</div>
+					</span>
+				</li>
+				<li class="list-group-item"> {{ photo.pred.tag4 }} : {{ photo.pred.prob4 }}% 
+					<span >
+					<div class="progress">
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ photo.pred.prob4 }}%;">
+						</div>
+					</div>
+					</span>
+				</li>
+				<li class="list-group-item"> {{ photo.pred.tag5 }} : {{ photo.pred.prob5 }}% 
+					<span >
+					<div class="progress">
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ photo.pred.prob5 }}%;">
+						</div>
+					</div>
+					</span>
+				</li>
+				</ul>
+
+			<!-- </div> -->
+		</div>
+	</div>
+{% endif %}
+</div>
+
+{% include 'footer.html' %}
