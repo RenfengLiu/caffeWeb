@@ -77,7 +77,7 @@ def get_labels():
 def get_predict_labels(img_url, classifier, labels_all):
     labels = []
     scores = classifier.predict([caffe.io.load_image(img_url)],oversample = False)
-    label_index = scores.argsort()[:,::-1][:,:10]
+    label_index = scores.argsort()[:,::-1][:,:7]
     # print label_index
     label_index = label_index.reshape(-1)
     # print scores.shape
