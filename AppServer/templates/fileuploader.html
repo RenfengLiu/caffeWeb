@@ -4,42 +4,66 @@
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-sm-12 ">
-		  <h1 class="page-header text-center">Food Photo Upload</h1>
+		  <h1 class="page-header text-center">File Upload</h1>
 		</div>
 		<div class="centered col-sm-12 ">
-		<form enctype="multipart/form-data" method="post" action="/fileupload/">
-			{% csrf_token %}
-            <div class="form-group">
-                <input id="meal_photo" type="file" name="meal_photo" class="file">
-            </div>
-		</form>
+			<form enctype="multipart/form-data" method="post" action="/fileupload/" class="form-horizontal" id="imgForm">
+				{% csrf_token %}
+				<input type="hidden" name="imgsource" id="imgsource" value="1">
+	            <div class="form-group">
+	             	<label for="upload" class="col-sm-2 control-label">Upload</label>
+				    <div class="col-sm-10">
+				      <input id="meal_photo" type="file" name="meal_photo" class="file form-control"  placeholder="Uoload Image.">
+				    </div>    
+	            </div>
+
+	            <div class="form-group">
+	            	<label for="upload" class="col-sm-2 control-label">Input from URL:</label>
+	            	<div class="input-group">
+	            		<div >
+		                	<input id="imgUrl" type="text" class="form-control"  name="imgurl">
+		            	</div>
+		            	<div class="input-group-btn">
+		            		<button class="btn btn-primary " type="submit"  id="submitForm">Classify from URL</button>
+	                	</div>
+	                </div>
+	            </div>
+
+			</form>
 		</div>
 	</div>
 
 {% if uploaded %}
 	<div class="row">
 		<div class="col-sm-6">
-			<img class="center-block" src="{% static ""%}{{file_path}}"  alt="" >
+			<img class="center-block img-responsive" src="{{img_link}}"   alt="" >
 		</div>
 		<div class="col-sm-6">
-				<!-- <div class="media-body"> -->
 				<ul class="list-group">
 				{% for label, prob in  pred%}
 				<li class="list-group-item "> {{ label }} {{ prob }}%
-					<!-- <span > -->
 					<div class="progress">
-						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ photo.pred.prob1 }}%;">
+						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob }}%;">
 						</div>
 					</div>
-					<!-- </span> -->
 				</li>
 				{% endfor %}	
 				</ul>
-
-			<!-- </div> -->
 		</div>
 	</div>
 {% endif %}
 </div>
 
 {% include 'footer.html' %}
+
+<script type="text/javascript">
+$(function(){
+	$("#submitForm").click(function(event)
+	{
+		event.preventDefault(); // cancel default behavior
+		$("#imgsource").val("2");
+		$("#imgForm").submit();
+	});
+
+});
+</script>
