@@ -1,4 +1,4 @@
-import urllib, StringIO
+import urllib2, StringIO
 from django.shortcuts import render, redirect                                                                                      
 from django.http import Http404, HttpResponse
 import classification 
@@ -15,7 +15,7 @@ def fileupload_view(request):
             file_path = 'AppServer/static/assets/img/' + uploaded_file.name
 
             img_link = '/static/assets/img/' + file_name
-            destination = open(file_path, 'wb+')
+            destination = open(file_path, 'w+')
             for chunk in uploaded_file.chunks():
             	destination.write(chunk)
             destination.close()
@@ -23,11 +23,13 @@ def fileupload_view(request):
             img_url = request.POST["imgurl"]
             file_path = 'AppServer/static/assets/img/'+'tmp.jpg'
             file_name = 'tmp.jpg'
-
-            destination = open(file_path, 'wb+')
-            string_buffer =urllib.urlopen(img_url).read()
-            destination.write(string_buffer)
-            destination.close()
+            try:
+                destination = open(file_path, 'w+')
+                string_buffer =urllib2.urlopen(img_url).read()
+                destination.write(string_buffer)
+                destination.close()
+            except:
+                print "can not download image..."
             img_link = img_url
 
         pred = classification.get_predict_labels(file_path, classifier, labels_all)
