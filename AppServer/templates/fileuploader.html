@@ -6,34 +6,8 @@
 		<div class="col-sm-12 ">
 		  <h1 class="page-header text-center">Food Image Classification</h1>
 		</div>
-		<div class="centered col-sm-12 ">
-			<form enctype="multipart/form-data" method="post" action="/fileupload/" class="form-horizontal" id="imgForm">
-				{% csrf_token %}
-				<input type="hidden" name="imgsource" id="imgsource" value="1">
-	            <div class="form-group">
-	             	<label for="upload" class="col-sm-2 control-label">Upload:</label>
-				    <div class="col-sm-10">
-				      <input id="meal_photo" type="file" name="meal_photo" class="file form-control"  placeholder="Uoload Image.">
-				    </div>    
-	            </div>
 
-	            <div class="form-group">
-	            	<label for="upload" class="col-sm-2 control-label">From URL:</label>
-	            	<div class="input-group">
-	            		<div >
-		                	<input id="imgUrl" type="text" class="form-control"  name="imgurl">
-		            	</div>
-		            	<div class="input-group-btn">
-		            		<button class="btn btn-primary " type="submit"  id="submitForm">Classify from URL</button>
-	                	</div>
-	                </div>
-	            </div>
-
-			</form>
-		</div>
-	</div>
-
-{% if uploaded %}
+	{% if uploaded %}
 	<div class="row">
 		<div class="col-sm-12 ">
 		  <h3 class="page-header text-center">Classification Results</h3>
@@ -56,6 +30,37 @@
 		</div>
 	</div>
 {% endif %}
+	
+		<div class="centered col-sm-12 ">
+			<form enctype="multipart/form-data" method="post" action="/fileupload/" class="form-horizontal" id="imgForm">
+				{% csrf_token %}
+				<input type="hidden" name="imgsource" id="imgsource" value="1">
+	            <div class="form-group">
+	            	<label for="upload" class="col-sm-2 control-label">From URL:</label>
+	            	<div class="input-group">
+	            		<div >
+		                	<input id="imgUrl" type="text" class="form-control"  name="imgurl">
+		            	</div>
+		            	<div class="input-group-btn">
+		            		<button class="btn btn-primary " type="submit"  id="submitForm">Classify from URL</button>
+	                	</div>
+	                </div>
+	            </div>
+				
+	            <div class="form-group">
+	             	<label for="upload" class="col-sm-2 control-label">Upload:</label>
+				    <div class="col-sm-10">
+				      <input id="meal_photo" type="file" name="meal_photo" class="file form-control"  placeholder="Uoload Image.">
+				    </div>    
+	            </div>
+
+
+
+			</form>
+		</div>
+	</div>
+
+
 </div>
 
 {% include 'footer.html' %}
