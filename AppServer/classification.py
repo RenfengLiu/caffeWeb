@@ -29,10 +29,10 @@ def load_model():
     caffe.set_mode_cpu()
 
     # Make sure that caffe is on the python path:
-    mean = BinaryProbToNPY(caffe_root + 'models/food101/food_mean.binaryproto', 256, 256, 3)
+    mean = BinaryProbToNPY(caffe_root + 'models/web/food101_mean.binaryproto', 256, 256, 3)
     print mean.shape
-    net = caffe.Classifier(caffe_root + 'models/food101/deploy.prototxt',
-                           caffe_root + 'models/food101/bvlc_googlenet_iter_640000.caffemodel',
+    net = caffe.Classifier(caffe_root + 'models/web/g101.prototxt',
+                           caffe_root + 'models/web/g101_ft.caffemodel',
 			   mean=mean.mean(1).mean(1),
 			   channel_swap=(2,1,0),
                            raw_scale=255,
@@ -64,7 +64,7 @@ def load_model():
 
 def get_labels():
     labels = []
-    f = open(caffe_root + 'models/food101/labels.txt')
+    f = open(caffe_root + 'models/web/labels.txt')
     i = 0
     for line in f:
         # print line
