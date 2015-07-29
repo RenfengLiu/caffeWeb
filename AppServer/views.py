@@ -31,15 +31,17 @@ def fileupload_view(request):
             destination.close()
         else:
             img_url = request.POST["imgurl"]
+            print img_url
             file_path = 'AppServer/static/assets/img/'+ str(uuid.uuid1()) + '.jpg'
             # file_name = 'tmp.jpg'
             try:
                 destination = open(file_path, 'w+')
-                string_buffer =urllib2.urlopen(img_url).read()
+                string_buffer = urllib2.urlopen(img_url).read()
                 destination.write(string_buffer)
                 destination.close()
-            except:
+            except Exception as e:
                 print "can not download image"
+                print e
                 error = 1
             img_link = img_url
 
