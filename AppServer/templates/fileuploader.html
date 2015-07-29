@@ -1,4 +1,5 @@
 {% load staticfiles %}
+{% load mytag %}
 {% include 'header.html' %}
 
 <div class="container-fluid">
@@ -27,9 +28,9 @@
                 <div class="col-sm-6">
                         <ul class="list-group">
                         {% for label, prob in  pred%}
-                        <li class="list-group-item "> {{ label }} {{ prob }}%
+                        <li class="list-group-item "> {{ label }} {% multiply prob  100 %}%
                             <div class="progress">
-                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob }}%;">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {%   multiply prob   100 %}%;">
                                 </div>
                             </div>
                         </li>

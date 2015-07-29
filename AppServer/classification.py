@@ -1,10 +1,13 @@
 import sys
-import os
 import numpy as np
 
-caffe_root = '/opt/caffe/'
-print caffe_root
-sys.path.insert(0, caffe_root + 'python')
+CAFFE_ROOT = '/opt/caffe/'
+MEAN_FILE = 'models/web/food101_mean.binaryproto'
+DEPLOY_FILE = 'models/web/g101.prototxt'
+MODEL_FILE = 'models/web/g101_ft.caffemodel'
+LABEL_FILE = 'models/web/labels.txt'
+RETURN_TOP_N = 10
+sys.path.insert(0, CAFFE_ROOT + 'python')
 import caffe
 
 
@@ -22,9 +25,9 @@ def binary_prob_to_npy(path, W, H, C):
 def load_model():
     caffe.set_mode_cpu()
 
-    mean = binary_prob_to_npy(caffe_root + 'models/web/food101_mean.binaryproto', 256, 256, 3)
-    net = caffe.Classifier(caffe_root + 'models/web/g101.prototxt',
-                           caffe_root + 'models/web/g101_ft.caffemodel',
+    mean = binary_prob_to_npy(CAFFE_ROOT + MEAN_FILE, 256, 256, 3)
+    net = caffe.Classifier(CAFFE_ROOT + DEPLOY_FILE,
+                           CAFFE_ROOT + MODEL_FILE,
                            mean=mean.mean(1).mean(1),
                            channel_swap=(2, 1, 0),
                            raw_scale=255,
@@ -35,7 +38,7 @@ def load_model():
 
 def get_labels():
     labels = []
-    f = open(caffe_root + 'models/web/labels.txt')
+    f = open(CAFFE_ROOT + LABEL_FILE)
     for line in f:
         label = line
         labels.append(label)
@@ -43,14 +46,14 @@ def get_labels():
     return labels
 
 
-def get_predict_labels(img_url, classifier, labels_all):
+def get_predict_labels(img_url, trained_classifier, labels_all):
     labels = []
-    scores = classifier.predict([caffe.io.load_image(img_url)], oversample=False)
-    label_index = scores.argsort()[:, ::-1][:, :10]
+    scores = trained_classifier.predict([caffe.io.load_image(img_url)], oversample=False)
+    label_index = scores.argsort()[:, ::-1][:, :RETURN_TOP_N]
     label_index = label_index.reshape(-1)
     scores = scores.reshape(-1)
     for index in label_index:
-        labels.append((labels_all[index][:-1], round(100*scores[index], 2)))
+        labels.append((labels_all[index][:-1], round(scores[index], 4)))
     return labels
 
 

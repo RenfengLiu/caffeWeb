@@ -50,16 +50,19 @@ def fileupload_view(request):
     else:
         return render(request, 'fileuploader.html', {})
 
+
 @csrf_exempt
 def classifyimage_view(request):
     if request.method == "POST":
-        lables = []
+        label = []
         image_path = request.POST["photo_path"]
-        if os.path.isfile(image_path):
-            print image_path
+        if not os.path.isfile(image_path):
+            print 'Photo %s not found' % image_path
+            return HttpResponse('Photo not found!', status=400)
 
         pred = classification.get_predict_labels(image_path, classifier, labels_all)
         for item in pred:
-            lables.append({'name': item[0], 'prob': item[1]})
-        print lables
-        return HttpResponse(json.dumps(lables), content_type="application/json")
+            label.append({'name': item[0], 'prob': item[1]})
+        print label
+        return HttpResponse(json.dumps(label), content_type="application/json")
+
