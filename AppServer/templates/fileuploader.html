@@ -8,29 +8,38 @@
 		</div>
 
 	{% if uploaded %}
-	<div class="row">
-		<div class="col-sm-12 ">
-		  <h3 class="page-header text-center">Classification Results</h3>
-		</div>
-		<hr>
-		<div class="col-sm-6">
-			<img class="center-block img-responsive" src="{{img_link}}"   alt="" >
-		</div>
-		<div class="col-sm-6">
-				<ul class="list-group">
-				{% for label, prob in  pred%}
-				<li class="list-group-item "> {{ label }} {{ prob }}%
-					<div class="progress">
-						<div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob }}%;">
-						</div>
-					</div>
-				</li>
-				{% endfor %}	
-				</ul>
-		</div>
-	</div>
-	<br>
-	<br>
+
+        {% if error %}
+            <div class="row">
+                <div class="col-sm-12 ">
+                    <div class="alert alert-danger" role="alert">Can not save image for classification.</div>
+                </div>
+            </div>
+        {% else %}
+            <div class="row">
+                <div class="col-sm-12 ">
+                  <h3 class="page-header text-center">Classification Results</h3>
+                </div>
+                <hr>
+                <div class="col-sm-6">
+                    <img class="center-block img-responsive" src="{{img_link}}"   alt="" >
+                </div>
+                <div class="col-sm-6">
+                        <ul class="list-group">
+                        {% for label, prob in  pred%}
+                        <li class="list-group-item "> {{ label }} {{ prob }}%
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuemin="0" aria-valuemax="100" style="width: {{ prob }}%;">
+                                </div>
+                            </div>
+                        </li>
+                        {% endfor %}
+                        </ul>
+                </div>
+            </div>
+            <br>
+            <br>
+        {% endif %}
 {% endif %}
 	
 		<div class="centered col-sm-12 ">
@@ -55,14 +64,9 @@
 				      <input id="meal_photo" type="file" name="meal_photo" class="file form-control"  placeholder="Uoload Image.">
 				    </div>    
 	            </div>
-
-
-
 			</form>
 		</div>
 	</div>
-
-
 </div>
 
 {% include 'footer.html' %}
@@ -75,6 +79,5 @@ $(function(){
 		$("#imgsource").val("2");
 		$("#imgForm").submit();
 	});
-
 });
 </script>

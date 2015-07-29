@@ -15,6 +15,7 @@ labels_all = classification.get_labels()
 
 def fileupload_view(request):
     if request.method == "POST":
+        error = None
         file_source = request.POST["imgsource"]
         if file_source == "1":
             uploaded_file = request.FILES['meal_photo']
@@ -37,12 +38,13 @@ def fileupload_view(request):
                 destination.write(string_buffer)
                 destination.close()
             except:
-                print "can not download image..."
+                print "can not download image"
+                error = "can not download image."
             img_link = img_url
 
         pred = classification.get_predict_labels(file_path, classifier, labels_all)
-        file_path = 'assets/img/' + file_name
-        return render(request, 'fileuploader.html', {'pred':pred, 'img_link':img_link, 'uploaded':1})
+        # file_path = 'assets/img/' + file_name
+        return render(request, 'fileuploader.html', {'pred':pred, 'img_link': img_link, 'uploaded': 1, 'error': error})
     else:
         return render(request, 'fileuploader.html', {})
 
