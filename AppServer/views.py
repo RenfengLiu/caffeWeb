@@ -15,7 +15,7 @@ labels_all = classification.get_labels()
 
 def fileupload_view(request):
     if request.method == "POST":
-        error = None
+        error = 0
         pred = None
         file_source = request.POST["imgsource"]
         if file_source == "1":
@@ -40,7 +40,7 @@ def fileupload_view(request):
                 destination.close()
             except:
                 print "can not download image"
-                error = "can not download image."
+                error = 1
             img_link = img_url
 
         if not error:
