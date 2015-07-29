@@ -1,9 +1,9 @@
 import urllib2
 import uuid
 import os
+import json
 
 from django.shortcuts import render
-import json
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 
@@ -33,7 +33,6 @@ def fileupload_view(request):
             img_url = request.POST["imgurl"]
             print img_url
             file_path = 'AppServer/static/assets/img/'+ str(uuid.uuid1()) + '.jpg'
-            # file_name = 'tmp.jpg'
             try:
                 destination = open(file_path, 'w+')
                 string_buffer = urllib2.urlopen(img_url).read()
@@ -47,7 +46,6 @@ def fileupload_view(request):
 
         if not error:
             pred = classification.get_predict_labels(file_path, classifier, labels_all)
-        # file_path = 'assets/img/' + file_name
         return render(request, 'fileuploader.html', {'pred':pred, 'img_link': img_link, 'uploaded': 1, 'error': error})
     else:
         return render(request, 'fileuploader.html', {})

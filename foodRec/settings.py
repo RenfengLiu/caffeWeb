@@ -54,23 +54,6 @@ ROOT_URLCONF = 'foodRec.urls'
 
 WSGI_APPLICATION = 'foodRec.wsgi.application'
 
-
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-#DATABASES = {
-#    'default': {
-#        'ENGINE': 'django.db.backends.sqlite',
-#        'NAME': 'glucoguide',
-#        'USER': 'glucoguide',
-#        'PASSWORD': 'glucoguide',
-#        'HOST': '127.0.0.1'
-#    }
-#}
-
-# Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -96,15 +79,4 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-LOGIN_URL = '/login/'
-
 URL_ROOT = '/'
-PHOTO_UPLOAD_PATH=BASE_DIR+'../AppServer/static/assets/img'
-#PHOTO_UPLOAD_PATH = "/opt/GlucoGuide/user_photo"
-# PHOTO_UPLOAD_PATH = os.path.join(BASE_DIR, os.path.join('AppServer', os.path.join('static', 'user_photo')))
-# PHOTO_UPLOAD_PATH = BASE_DIR + "/AppServer" + STATIC_URL + 'user_photo'
-# PHOTO_UPLOAD_PATH = "./user_photo"
-# from AppServer import context_processors
-
-
-

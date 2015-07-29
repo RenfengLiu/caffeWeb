@@ -1,10 +1,6 @@
 import sys
 import os
-
 import numpy as np
-
-# import matplotlib.pyplot as plt
-# import h5py
 
 caffe_root = '/opt/caffe/'
 print caffe_root
@@ -24,14 +20,9 @@ def binary_prob_to_npy(path, W, H, C):
 
 
 def load_model():
-    # global caffe_root
-
-    #caffe.set_phase_test()
     caffe.set_mode_cpu()
 
-    # Make sure that caffe is on the python path:
     mean = binary_prob_to_npy(caffe_root + 'models/web/food101_mean.binaryproto', 256, 256, 3)
-    print mean.shape
     net = caffe.Classifier(caffe_root + 'models/web/g101.prototxt',
                            caffe_root + 'models/web/g101_ft.caffemodel',
                            mean=mean.mean(1).mean(1),
@@ -39,27 +30,6 @@ def load_model():
                            raw_scale=255,
                            image_dims=(256, 256))
 
-    # mean = BinaryProbToNPY(caffe_root + 'models/food101/food_mean.binaryproto', 256, 256, 3)
-    # net.set_mean('data', mean)  # ImageNet mean
-    # net.set_raw_scale('data', 255)  # the reference model operates on images in [0,255] range instead of [0,1]
-    # net.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB
-    # net.set_phase_test()
-    # net.set_mode_cpu()
-    # input preprocessing: 'data' is the name of the input blob == net.inputs[0]
-    '''
-    f = h5py.File('image_mean.mat')
-    mean = f['image_mean']
-    mean = np.asarray(mean)
-    print mean.shape[2:]
-    net.set_mean('data', mean)  # ImageNet mean
-    net.set_raw_scale('data', 255)  # the reference model operates on images in [0,255] range instead of [0,1]
-    net.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB
-    '''
-
-    # net.set_mean('data', np.load(caffe_root + 'python/caffe/imagenet/ilsvrc_2012_mean.npy'))  # ImageNet mean
-    # net.set_raw_scale('data', 255)  # the reference model operates on images in [0,255] range instead of [0,1]
-    # net.set_channel_swap('data', (2,1,0))  # the reference model has channels in BGR order instead of RGB
-    # print net
     return net
 
 
@@ -67,7 +37,6 @@ def get_labels():
     labels = []
     f = open(caffe_root + 'models/web/labels.txt')
     for line in f:
-        # print line
         label = line
         labels.append(label)
 
