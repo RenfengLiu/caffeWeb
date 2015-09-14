@@ -61,7 +61,7 @@ def classifyimage_view(request):
             return HttpResponse('Photo not found!', status=400)
 
         pred = classification.get_predict_labels(image_path, classifier, labels_all)
-        if(pred[0][1] < 0.77):
+        if(pred[0][1] < 0.70):
             print pred[0][1]
             print 'Cannot Recognize photo %s' % image_path
             return HttpResponse('Cannot Recognize photo!', status=400)

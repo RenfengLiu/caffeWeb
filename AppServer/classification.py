@@ -2,10 +2,10 @@ import sys
 import numpy as np
 
 CAFFE_ROOT = '/opt/caffe/'
-MEAN_FILE = 'models/FoodAug13/food_mean.binaryproto'
-DEPLOY_FILE = 'models/FoodAug13/deploy.prototxt'
-MODEL_FILE = 'models/FoodAug13/googlenet_quick_iter_880000.caffemodel'
-LABEL_FILE = 'models/FoodAug13/label_Aug11.txt'
+MEAN_FILE = 'models/FoodAug31/food_mean.binaryproto'
+DEPLOY_FILE = 'models/FoodAug31/deploy.prototxt'
+MODEL_FILE = 'models/FoodAug31/model.caffemodel'
+LABEL_FILE = 'models/FoodAug31/label_Aug31.txt'
 RETURN_TOP_N = 10
 sys.path.insert(0, CAFFE_ROOT + 'python')
 import caffe
