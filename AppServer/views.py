@@ -7,6 +7,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from models import ClassificationResults
+from django.utils import timezone
 
 import classification
 
@@ -59,6 +60,7 @@ def save_classification_result(image_path, pred, threshold):
         cls_ret = ClassificationResults()
 
     cls_ret.image_path = image_path
+    cls_ret.upload_date = timezone.now()
     cls_ret.is_food = pred[0]['prob'] >= threshold
     cls_ret.threshold = threshold
 
