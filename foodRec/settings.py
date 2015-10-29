@@ -50,6 +50,13 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
 ROOT_URLCONF = 'foodRec.urls'
 
 WSGI_APPLICATION = 'foodRec.wsgi.application'

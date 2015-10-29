@@ -1,0 +1,59 @@
+{% load staticfiles %}
+{% load mytag %}
+{% include 'header.html' %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12 ">
+		  <h1 class="page-header text-center">Food Image Classification Results</h1>
+		</div>
+
+    <div >
+
+        <div class="table-responsive col-sm-12">
+          <table class="table table-hove table-striped display nowrap dataTable dtr-inline" id="activities">
+              <thead>
+                  <tr>
+                    <th>Image</th>
+                    <th>Time</th>
+                    <th>Is Food</th>
+                    <th>Name</th>
+                    <th>Prob</th>
+                    <th>Name</th>
+                    <th>Prob</th>
+                    <th>Name</th>
+                    <th>Prob</th>
+                    <th>Name</th>
+                    <th>Prob</th>
+                    <th>Name</th>
+                    <th>Prob</th>
+                  </tr>
+              </thead>
+              <tbody>
+              {% for info in results %}
+                  <tr>
+                      <td>{{ info.image_path }}</td>
+                      <td>{{ info.image_path }}</td>
+                      <td >{{ info.is_food }}</td>
+                      <td>{{ info.label1 }}</td>
+                      <td>{{ info.prob1 }}</td>
+                      <td>{{ info.label2 }}</td>
+                      <td>{{ info.prob2 }}</td>
+                      <td>{{ info.label3 }}</td>
+                      <td>{{ info.prob3 }}</td>
+                      <td>{{ info.label4 }}</td>
+                      <td>{{ info.prob4 }}</td>
+                      <td>{{ info.label5 }}</td>
+                      <td>{{ info.prob5 }}</td>
+                  </tr>
+              {% endfor %}
+              </tbody>
+          </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% include 'footer.html' %}
+
