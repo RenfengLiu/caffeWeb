@@ -17,38 +17,40 @@
                     <th>Image</th>
                     <th>Time</th>
                     <th>Is Food</th>
-                    <th>Name</th>
-                    <th>Prob</th>
-                    <th>Name</th>
-                    <th>Prob</th>
-                    <th>Name</th>
-                    <th>Prob</th>
-                    <th>Name</th>
-                    <th>Prob</th>
-                    <th>Name</th>
-                    <th>Prob</th>
+                    <th>Prediction</th>
+                      <th>Prob</th>
                   </tr>
               </thead>
               <tbody>
               {% for info in results %}
                   <tr>
-                      <td>
+                      <td rowspan=5>
                           <div>
                               <a href="{{ info.image_path }}">
                                   <img src="{{ info.image_path }}" class="img-rounded" height="160">
                               </a>
                           </div>
                       </td>
-                      <td>{{ info.upload_date }}</td>
-                      <td >{{ info.is_food }}</td>
+                      <td rowspan=5>{{ info.upload_date }}</td>
+                      <td rowspan=5>{{ info.is_food }}</td>
+                  </tr>
+                  <tr>
                       <td>{{ info.label1 }}</td>
                       <td>{{ info.prob1 }}</td>
+                  </tr>
+                  <tr>
                       <td>{{ info.label2 }}</td>
                       <td>{{ info.prob2 }}</td>
+                  </tr>
+                  <tr>
                       <td>{{ info.label3 }}</td>
                       <td>{{ info.prob3 }}</td>
+                  </tr>
+                  <tr>
                       <td>{{ info.label4 }}</td>
                       <td>{{ info.prob4 }}</td>
+                  </tr>
+                  <tr>
                       <td>{{ info.label5 }}</td>
                       <td>{{ info.prob5 }}</td>
                   </tr>
