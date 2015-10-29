@@ -92,7 +92,7 @@ def classifyimage_view(request):
         for item in pred:
             label.append({'name': item[0], 'prob': item[1]})
         print label
-        threshold = 0.58
+        threshold = 0.37
         save_classification_result(image_path, label, threshold)
         if pred[0][1] < threshold:
             print pred[0][1]
@@ -108,7 +108,7 @@ def cls_results_view(request):
     ret = []
 
     for result in results:
-        result.image_path = result.image_path.replace('/var/www/GlucoGuide/production/current/services/entryPoint/public/images/', '/static/')
+        result.image_path = result.image_path.replace('/var/www/GlucoGuide/production/current/services/entryPoint/public/', '/static/')
         ret.append(result)
 
     return render(request, 'results.html', {'results': results})
