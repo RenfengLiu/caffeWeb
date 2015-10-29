@@ -18,21 +18,21 @@
                     <th>Time</th>
                     <th>Is Food</th>
                     <th>Prediction</th>
-                      <th>Prob</th>
+                    <th>Prob</th>
                   </tr>
               </thead>
               <tbody>
               {% for info in results %}
                   <tr>
-                      <td rowspan=5>
+                      <td rowspan=6>
                           <div>
                               <a href="{{ info.image_path }}">
                                   <img src="{{ info.image_path }}" class="img-rounded" height="160">
                               </a>
                           </div>
                       </td>
-                      <td rowspan=5>{{ info.upload_date }}</td>
-                      <td rowspan=5>{{ info.is_food }}</td>
+                      <td rowspan=6>{{ info.upload_date }}</td>
+                      <td rowspan=6><p class="{%  if  info.is_food %}text-success {% else %} text-danger {% endif %}">{{ info.is_food }} </p></td>
                   </tr>
                   <tr>
                       <td>{{ info.label1 }}</td>
