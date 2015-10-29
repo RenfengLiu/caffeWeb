@@ -32,8 +32,14 @@
               <tbody>
               {% for info in results %}
                   <tr>
-                      <td>{{ info.image_path }}</td>
-                      <td>{{ info.image_path }}</td>
+                      <td>
+                          <div>
+                              <a href="{{ info.image_path }}">
+                                  <img src="{{ info.image_path }}" class="img-rounded" height="160">
+                              </a>
+                          </div>
+                      </td>
+                      <td>{{ info.upload_date }}</td>
                       <td >{{ info.is_food }}</td>
                       <td>{{ info.label1 }}</td>
                       <td>{{ info.prob1 }}</td>
