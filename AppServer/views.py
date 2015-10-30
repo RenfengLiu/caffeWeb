@@ -109,6 +109,7 @@ def cls_results_view(request):
 
     for result in results:
         result.image_path = result.image_path.replace('/var/www/GlucoGuide/production/source/services/entryPoint/app/controllers/../../public/', '/static/')
-        ret.append(result)
+        result.image_path = result.image_path.replace('/opt/data/', '/static/img/')
+	ret.append(result)
 
     return render(request, 'results.html', {'results': results})
