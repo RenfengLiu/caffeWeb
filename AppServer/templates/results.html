@@ -34,23 +34,23 @@
                       <td rowspan=6>{{ info.upload_date }}</td>
                       <td rowspan=6><p class="{%  if  info.is_food %}text-success {% else %} text-danger {% endif %}">{{ info.is_food }} </p></td>
                   </tr>
-                  <tr>
+                  <tr class="success">
                       <td>{{ info.label1 }}</td>
                       <td>{{ info.prob1 }}</td>
                   </tr>
-                  <tr>
+                  <tr class="info">
                       <td>{{ info.label2 }}</td>
                       <td>{{ info.prob2 }}</td>
                   </tr>
-                  <tr>
+                  <tr class="active">
                       <td>{{ info.label3 }}</td>
                       <td>{{ info.prob3 }}</td>
                   </tr>
-                  <tr>
+                  <tr class="warning">
                       <td>{{ info.label4 }}</td>
                       <td>{{ info.prob4 }}</td>
                   </tr>
-                  <tr>
+                  <tr class="danger">
                       <td>{{ info.label5 }}</td>
                       <td>{{ info.prob5 }}</td>
                   </tr>
