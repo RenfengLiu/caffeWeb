@@ -3,7 +3,7 @@
 <html>
 <head lang="en">
 	{% include 'res.html' %}
-	<title>GlucoGuide Admin</title>
+	<title>GlucoGuide Food Recognition Server</title>
 </head>
 
 <body>
@@ -21,30 +21,6 @@
     </div>
     <div class="navbar-collapse collapse">
 
-    {% if user_privilege > 2 %}
-      <ul class="nav navbar-nav">
-        <li><a href="{{ URL_ROOT }}/opdata">Statistics</a></li>
-        <li><a href="{{ URL_ROOT }}/statistics">Activities</a></li>
-        <li><a href="{{ URL_ROOT }}/userlist">Records</a></li>
-      {% if user_privilege > 10 %}
-        <li><a href="{{ URL_ROOT }}/settings">Settings</a></li>
-      {% endif %}
-        <li><a href="{{ URL_ROOT }}/recommendations">Recommendations</a></li>
-        <li><a href="{{ URL_ROOT }}/tags">Tags</a></li>
-        <li><a href="{{ URL_ROOT }}/notification">Notification
-        {% if photo_count or note_count%}
-        <span class="badge badge-danger">{{photo_count|add:note_count}}</span>
-        {%endif%}
-        </a></li>
-        <!--<li><a href="#">Profile</a></li>-->
-    {% endif %}
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        {% if is_user_loggedin %}
-        <!-- <li>Hello, </li> -->
-        <li><a href="{{ URL_ROOT }}/logout">Logout</a></li>
-        {% endif %}
-      </ul>
     </div>
   </div>
 </div>
