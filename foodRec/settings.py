@@ -50,13 +50,20 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.cache.FetchFromCacheMiddleware',
 )
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+
 ROOT_URLCONF = 'foodRec.urls'
 
 WSGI_APPLICATION = 'foodRec.wsgi.application'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Toronto'
 
 USE_I18N = True
 
