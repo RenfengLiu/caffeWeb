@@ -92,7 +92,7 @@ def classifyimage_view(request):
         for item in pred:
             label.append({'name': item[0], 'prob': item[1]})
         print label
-        threshold = 0.72
+        threshold = 0.45
         save_classification_result(image_path, label, threshold)
         if pred[0][1] < threshold:
             print pred[0][1]
