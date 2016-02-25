@@ -4,10 +4,10 @@ import operator
 
 
 CAFFE_ROOT = '/opt/caffe/'
-MEAN_FILE = 'models/FoodDec27/food_mean.binaryproto'
-DEPLOY_FILE = 'models/FoodDec27/deploy.prototxt'
-MODEL_FILE = 'models/FoodDec27/googlenet_quick_iter_40000.caffemodel'
-LABEL_FILE = 'models/FoodDec27/label.txt'
+MEAN_FILE = 'models/FoodFeb13/food_mean.binaryproto'
+DEPLOY_FILE = 'models/FoodFeb13/deploy.prototxt'
+MODEL_FILE = 'models/FoodFeb13/googlenet_quick_iter_160147.caffemodel'
+LABEL_FILE = 'models/FoodFeb13/label.txt'
 RETURN_TOP_N = 10
 sys.path.insert(0, CAFFE_ROOT + 'python')
 import caffe
